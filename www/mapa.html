@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <title>LPA Tourism Mapa</title>
+    <link rel="stylesheet" href="components/themes/Template1.min.css" />
+    <link rel="stylesheet" href="components/themes/Template1.css" />
+    <link rel="stylesheet" href="components/jquery.mobile.icons-1.4.5.css" />
+    <link rel="stylesheet" href="components/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="components/jquery.mobile.structure-1.4.5.min.css" />
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="components/leaflet/mapa.css">
+    <script src="components/leaflet/mapa.js"></script>
+    <script src="components/loader.js"></script>
+    <script src="components/jquery-2.2.4.min.js"></script>
+    <script src="components/jquery.mobile-1.4.5.min.js"></script>
+    <script src="components/jquery.mobile-1.4.5.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+    <script src="/components/calendar/js/calendar.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="components/animcalendar/dist/simple-calendar.css">
+    <link rel="stylesheet" href="components/animcalendar/assets/demo.css">
+
+    
+    <select name="select-location" id="select-location">
+        <option value="-1">Seleccione un lugar</option>
+        <option value="28.10071074776168, -15.414998088476695">Catedral de Santa Ana</option>
+        <option value="28.109089663002063, -15.416749130955147">Parque San Telmo</option>
+        <option value="28.12075144197502, -15.428731984146031">Parque Doramas</option>
+        <option value="28.14056034453634, -15.430639087362252">Parque Santa Catalina</option>
+        <option value="28.134034313397432, -15.44192204364935">Playa de Las Canteras</option>
+        <option value="28.071356953641796, -15.454221541884948">ULPGC Tafira</option>
+    </select>
+</head>
+
+<body>
+    <!-- <div data-role="page" id="mapa" data-theme="a"> -->
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" /> -->
+        <div data-role="header" data-position="fixed" align="center">
+            <h2>Mapa de las Palmas</h2>
+            <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+            <a href="index.html" data-icon="home" data-iconpos="notext">Home</a>
+        </div>
+
+        <div role="main" class="ui-content jqm-content jqm-fullwidth">
+        </div>
+        <!-- /content -->
+        <div data-role="panel" class="ui-panel-display-overlay" data-display="overlay" id="nav-panel" data-theme="a">
+            <ul data-role="listview" data-theme="a">
+                <li data-icon="delete" data-inset="true" data-theme="a"><a href="#" data-rel="close">Close menu</a></li>
+                <li><a href="index.html" data-inset="true" data-theme="a">Principal</a></li>
+                <li><a href="city.html" data-inset="true" data-theme="a">La ciudad</a></li>
+                <li><a href="scanner.html" data-inset="true" data-theme="a">Scanner</a></li>
+                <li><a href="calendar.html" data-inset="true" data-theme="a">Calendario</a></li>
+                <li><a href="enlaces.html" data-inset="true" data-theme="a">Enlaces de interés</a></li>
+                <li><a href="about.html" data-inset="true" data-theme="a">Acerca de</a></li>
+            </ul>
+        </div>
+        <div data-role="content">
+            <select name="select-location" id="select-location">
+                <option value="-1">Seleccione un lugar</option>
+                <option value="28.10071074776168, -15.414998088476695">Catedral de Santa Ana</option>
+                <option value="28.109089663002063, -15.416749130955147">Parque San Telmo</option>
+                <option value="28.12075144197502, -15.428731984146031">Parque Doramas</option>
+                <option value="28.14056034453634, -15.430639087362252">Parque Santa Catalina</option>
+                <option value="28.134034313397432, -15.44192204364935">Playa de Las Canteras</option>
+                <option value="28.071356953641796, -15.454221541884948">ULPGC Tafira</option>
+            </select>
+            <div id="map" data-role="map">
+                <!-- <style>
+                    
+                    body {
+                        height: 100%;
+                        margin: 1;
+                    }
+                    
+                    .leaflet-container {
+                        height: 800px;
+                        width: 550px;
+                        max-width: 100%;
+                        max-height: 200%;
+                    }
+                </style> -->
+
+                <style>
+                    body {
+                        padding: 0;
+                        margin: 0;
+                    }
+                    
+                    #map {
+                        height: 500px;
+                        width: 360px;
+                    }
+                </style>
+                <script>
+                    // var map = L.map('map').fitWorld();
+                    var L;
+
+                    // var marker = L.marker([28.10071074776168, -15.414998088476695]).addTo(map);
+                    // marker.bindPopup("<b>Esto es un monumento</b>").openPopup();
+                    // var popup = L.popup()
+                    //     .setLatLng([28.095, -15.44])
+                    //     .setContent("Esto es un parque")
+                    //     .openOn(map);
+
+                    var map = L.map('map').setView([28.10071074776168, -15.414998088476695], 14);
+
+                    var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 20,
+                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    }).addTo(map);
+
+                    document.getElementById('select-location').addEventListener('change', function(e) {
+                        let coords = e.target.value.split(",");
+                        map.flyTo(coords, 16);
+                        var marker = L.marker(coords).addTo(map);
+                    })
+
+                    // var popup = L.popup();
+                    // function onMapClick(e) {
+                    //     popup
+                    //         .setLatLng(e.latlng)
+                    //         .setContent("You clicked the map at " + e.latlng.toString())
+                    //         .openOn(map);
+                    // }
+                    // map.on('click', onMapClick);
+
+
+                    // function onLocationFound(e) {
+                    //     var radius = e.accuracy / 2;
+
+                    //     var locationMarker = L.marker(e.latlng).addTo(map)
+                    //         .bindPopup('You are within ' + radius + ' meters from this point').openPopup();
+
+                    //     var locationCircle = L.circle(e.latlng, radius).addTo(map);
+                    // }
+
+                    // function onLocationError(e) {
+                    //     alert(e.message);
+                    // }
+
+                    // map.on('locationfound', onLocationFound);
+                    // map.on('locationerror', onLocationError);
+
+                    // map.locate({setView: true, maxZoom: 16});
+                </script>
+            </div>
+            <div class="buttonmap">
+                <a href="" onclick="mostrarUbicacion()" data-role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-location">Ubicación actual</a>
+                <ul id="coordenadas"></ul>
+
+                <script>
+                    function mostrarUbicacion() {
+                        navigator.geolocation.getCurrentPosition(lecturaExitosa, error, {enableHighAccuracy: true});
+                        
+                    }
+                    
+                    function lecturaExitosa(posicion) {
+
+                        var lista = ""
+                        
+                        lista += "<li><b>Latitud:</b> " + posicion.coords.latitude + "</li>";
+                        lista += "<li><b>Longitud:</b> " + posicion.coords.longitude + "</li>";
+                        document.getElementById("coordenadas").innerHTML = lista
+
+                        map.flyTo([posicion.coords.latitude, posicion.coords.longitude], 16);
+                        var marker = L.marker([posicion.coords.latitude, posicion.coords.longitude]).addTo(map);
+                    }
+
+                    
+                    function error() {
+                        alert('No sé dónde estas');
+                    }
+                </script>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed" data-theme="a">
+            <small>LPApp Turismo</small>
+        </div>
+    <!-- </div> -->
+
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <title>LPA Tourism Links</title>
+    <link rel="stylesheet" href="components/themes/Template1.min.css" />
+    <link rel="stylesheet" href="components/themes/Template1.css" />
+    <link rel="stylesheet" href="components/jquery.mobile.icons-1.4.5.css" />
+    <link rel="stylesheet" href="components/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="components/jquery.mobile.structure-1.4.5.min.css" />
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="components/leaflet/mapa.css">
+    <script src="components/leaflet/mapa.js"></script>
+    <script src="components/loader.js"></script>
+    <script src="components/jquery-2.2.4.min.js"></script>
+    <script src="components/jquery.mobile-1.4.5.min.js"></script>
+    <script src="components/jquery.mobile-1.4.5.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+    <script src="/components/calendar/js/calendar.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="components/animcalendar/dist/simple-calendar.css">
+    <link rel="stylesheet" href="components/animcalendar/assets/demo.css">
+
+</head>
+
+<body>
+    <div data-role="page" id="enlaces">
+        <div data-role="header" data-position="fixed">
+            <h1>Enlaces de interés</h1>
+            <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+            <a href="index.html" data-icon="home" data-iconpos="notext">Home</a>
+        </div>
+
+        <div role="main" class="ui-content jqm-content jqm-fullwidth">
+
+            <!-- /content -->
+            <div data-role="panel" class="ui-panel-display-overlay" data-display="overlay" id="nav-panel" data-theme="a">
+                <ul data-role="listview" data-theme="a">
+                    <li data-icon="delete" data-inset="true" data-theme="a"><a href="#" data-rel="close">Close menu</a></li>
+                    <li><a href="index.html" data-inset="true" data-theme="a">Principal</a></li>
+                    <li><a href="city.html" data-inset="true" data-theme="a">La ciudad</a></li>
+                    <li><a href="mapa.html" data-inset="true" data-theme="a">Mapa</a></li>
+                    <li><a href="scanner.html" data-inset="true" data-theme="a">Scanner</a></li>
+                    <li><a href="calendar.html" data-inset="true" data-theme="a">Calendario</a></li>
+                    <li><a href="about.html" data-inset="true" data-theme="a">Acerca de</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div data-role="content" class="links"  id="enlceslist" data-theme="a">
+                <ul data-role="listview" data-theme="a">
+                    <li><a onclick="link1()" data-inset="true" data-theme="a">Ayuntamiento de las Palmas de GC</a></li>
+                    <li><a onclick="link2()" data-inset="true" data-theme="a">LPAvisit</a></li>
+                    <li><a onclick="link3()" data-inset="true" data-theme="a">Guaguas Municipales</a></li>
+                    <li><a onclick="link4()" data-inset="true" data-theme="a">Guaguas Global</a></li>
+                    <li><a onclick="link5()" data-inset="true" data-theme="a">Sitycleta</a></li>
+                    <li><a onclick="link6()" data-inset="true" data-theme="a">Universidad de Las Palmas de GC</a></li>
+                </ul>
+            </div>
+
+            <script>
+                function link1() {
+                    window.open("https://www.laspalmasgc.es/es/", '_system');
+                }
+
+                function link2() {
+                    window.open("https://lpavisit.com/es/", '_system');
+                }
+
+                function link3() {
+                    window.open("https://www.guaguas.com/", '_system');
+                }
+
+                function link4() {
+                    window.open("https://www.guaguasglobal.com/", '_system');
+                }
+
+                function link5() {
+                    window.open("https://www.sitycleta.com/es/", '_system');
+                }
+
+                function link6() {
+                    window.open("https://www.ulpgc.es/presentaci%C3%B3n", '_system');
+                }
+
+
+
+            </script>
+        <div data-role="footer" data-position="fixed" data-theme="a">            
+            <small>LPApp Turismo</small>
+        </div>
+        </div>
+        
+    
+</body>
+
+</html>

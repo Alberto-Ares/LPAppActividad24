@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <title>LPA Tourism Home</title>
+    <link rel="stylesheet" href="components/themes/Template1.min.css" />
+    <link rel="stylesheet" href="components/themes/Template1.css" />
+    <link rel="stylesheet" href="components/jquery.mobile.icons-1.4.5.css" />
+    <link rel="stylesheet" href="components/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="components/jquery.mobile.structure-1.4.5.min.css" />
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="components/leaflet/mapa.css">
+    <script src="components/leaflet/mapa.js"></script>
+    <script src="components/loader.js"></script>
+    <script src="components/jquery-2.2.4.min.js"></script>
+    <script src="components/jquery.mobile-1.4.5.min.js"></script>
+    <script src="components/jquery.mobile-1.4.5.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+    <script src="/components/calendar/js/calendar.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="components/animcalendar/dist/simple-calendar.css">
+    <link rel="stylesheet" href="components/animcalendar/assets/demo.css">
+</head>
+
+<body>
+    <div data-role="page" id="scanner">
+        <div data-role="header" data-position="fixed">
+            <h1>Scanner</h1>
+            <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+            <a href="index.html" data-icon="home" data-iconpos="notext">Home</a>
+        </div>
+        
+        <div role="main" class="ui-content jqm-content jqm-fullwidth">
+        </div>
+        <!-- /content -->
+        <div data-role="panel" class="ui-panel-display-overlay" data-display="overlay" id="nav-panel" data-theme="a">
+            <ul data-role="listview" data-theme="a">
+                <li data-icon="delete" data-inset="true" data-theme="a"><a href="#" data-rel="close">Close menu</a></li>
+                <li><a href="index.html" data-inset="true" data-theme="a">Principal</a></li>
+                <li><a href="city.html" data-inset="true" data-theme="a">La ciudad</a></li>
+                <li><a href="mapa.html" data-inset="true" data-theme="a">Mapa</a></li>
+                <li><a href="calendar.html" data-inset="true" data-theme="a">Calendario</a></li>
+                <li><a href="enlaces.html" data-inset="true" data-theme="a">Enlaces de interés</a></li>
+                <li><a href="about.html" data-inset="true" data-theme="a">Acerca de</a></li>
+            </ul>
+        </div>
+    
+        <!-- /header -->
+        <div data-role="content" align="center">
+            
+            <h1 align="center"> Scanner de puntos QR </h1>
+            <p align="justify">Busca códigos QR por toda la ciudad y usa el scanner para obtener más información de ese lugar.</p>
+            <ul id="listaDeLugares"></ul>
+
+            <!-- <button onclick="leerBaseDeDatos(0)">Ver lugares guardados </button><br><br> -->
+
+            <a href="" onclick="btnscan1()" data-role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-search">Scan</a>
+            <br>
+            <!-- <a href="" onclick="mostrarAlerta3()" data-role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-delete">Borrar</a> -->
+            <br>
+            <img src="lpapp2.jpg" width="60%">
+
+            
+            
+
+            <!-- <script type="text/javascript" src="../cordova.js"></script>
+            <script type="text/javascript"> -->
+            <script>
+                document.addEventListener("deviceready", onDeviceReady, false);
+
+
+
+
+                function onDeviceReady() {
+                    db = window.openDatabase("DemoDB", "1.0", "Demo Base de Datos", 200000);
+                    // db.transaction(poblarBD, errorBD, successBD);
+                    db.transaction(poblarBD, errorBD);
+                }
+
+                function poblarBD(tx) {
+                    tx.executeSql('DROP TABLE IF EXISTS lugares');
+                    // si no existe la tabla Artículos, la crea y agrega 4 columnas.
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS lugares (nombre, enlace)');
+                    // Una vez creada la tabla, inserta entradas en ella
+                    tx.executeSql('INSERT INTO lugares (nombre, enlace) VALUES ("Catedral de Santa Ana", "catedral")');
+                    tx.executeSql('INSERT INTO lugares (nombre, enlace) VALUES ("Parque San Telmo", "santelmo")');
+                    tx.executeSql('INSERT INTO lugares (nombre, enlace) VALUES ("Parque Santa Catalina", "stacatalina")');
+                    tx.executeSql('INSERT INTO lugares (nombre, enlace) VALUES ("Parque Doramas", "doramas")');
+                    tx.executeSql('INSERT INTO lugares (nombre, enlace) VALUES ("Playa de Las Canteras", "canteras")');
+                    tx.executeSql('INSERT INTO lugares (nombre, enlace) VALUES ("Universidad de Las Palmas de Gran Canaria", "ulpgc")');
+
+                }
+
+                function errorBD(tx, err) {
+                    alert("Error de SQL" + err);
+                }
+
+                // function leerBaseDeDatos(tipo) {
+                //     if (tipo == 0) {
+                //         db.transaction(leerBDSQL, errorBD);
+                //     } else {
+                //         db.transaction(btnscan1, errorBD);
+                //     }
+                // }
+
+                // function leerBDSQL(tx) {
+                //     tx.executeSql('SELECT * FROM lugares', [], mostrarResultados, errorBD);
+                // }
+
+                var codigobar;
+
+                function btnscan1() {
+                    cordova.plugins.barcodeScanner.scan(
+                        function(escaneo) {
+                            var lista = "";
+                            lista += escaneo.text;
+                            //document.getElementById("info").innerHTML = lista;      
+                            codigobar = lista
+                            db.transaction(leerBDSQLIdent, errorREAD)
+                        },
+                        function(error) {
+                            alert("Fallo en el Escaneado: " + error);
+                        }, {
+                            preferFrontCamera: false, // iOS and Android
+                            showFlipCameraButton: false, // iOS and Android
+                            showTorchButton: true, // iOS and Android
+                            torchOn: false, // Android, launch with the torch switched on (if available)
+                            saveHistory: false, // Android, save scan history (default false)
+                            prompt: "Enfoque al código QR dentro del área de escaneado", // Android
+                            resultDisplayDuration: 1500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
+                            formats: "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
+                            orientation: "portrait", // Android only (portrait|landscape), default unset so it rotates with the device
+                            disableAnimations: true, // iOS
+                            disableSuccessBeep: false // iOS and Android
+                        }
+                    );
+                }
+
+                function leerBDSQLIdent(tx) {
+                    var nombre = codigobar;
+                    tx.executeSql('SELECT * FROM lugares Where nombre=?', [nombre], mostrarResultados, errorREAD);
+                }
+
+                var locurl;
+                var nomlug;
+
+                function mostrarResultados(tx, resultados) {
+                    var lista = ""
+                    for (var a = 0; a < resultados.rows.length; a++) {
+                        lista += 
+                        // lista += "<b>Lugar:</b> " + resultados.rows.item(a).nombre + "<br>";
+                        // lista += "<b>Más info:</b> " + resultados.rows.item(a).enlace + "<br>";
+                        lista += 
+                    // Asignación de valores a las variables para crear una condición y para generar el enlace html
+                        locurl= resultados.rows.item(a).enlace + '.html'
+                        nomlug=resultados.rows.item(a).nombre
+                        }
+                    if (codigobar == nomlug) {
+                            navigator.notification.confirm('Desea obtener más información?', respuesta,'Código válido', 'Aceptar,Cancelar');
+                        } 
+                    else {
+                        errorREAD ()
+                        }
+
+                    // Diálogo de confirmación de acceso a la info del código QR    
+                    function respuesta(boton) 
+                            { 
+                                if(boton == 1)
+                                {
+                                window.location = locurl
+                                }
+                                else if( boton == 2)
+                                {
+                                alert( "Te perderás un montón de información interesante" )
+                                }
+
+                    
+                    
+                    document.getElementById("listaDeLugares").innerHTML = lista;
+                   } 
+                }
+
+            // Acceder a la info del QR con botón
+                function clickedButton() {
+                                       
+                    window.location = locurl 
+                    }
+            
+            
+            // Error de lectura 
+                function errorREAD(tx, err) {
+                    alert("Error en la lectura, código no registrado");
+                }
+
+                // Transaction success callback
+                //
+                function successBD() {
+                    alert("¡Base de datos preparada!");
+                }
+            </script>
+            
+         <div data-role="footer" data-position="fixed" data-theme="a">            
+            <small>LPApp Turismo</small>
+        </div>
+        </div>
+        
+    
+</body>
+
+</html>

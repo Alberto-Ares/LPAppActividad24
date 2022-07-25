@@ -1,0 +1,29 @@
+{
+    "name": "monaca-template-minimum",
+    "version": "3.0.1",
+    "displayName": "Monaca Template Minimum",
+    "dependencies": {
+        "cordova-plugin-splashscreen": "6.0.0",
+        "cordova-plugin-battery-status": "2.0.3",
+        "cordova-plugin-dialogs": "2.0.2",
+        "cordova-plugin-geolocation": "4.1.0",
+        "phonegap-plugin-barcodescanner": "8.1.0"
+    },
+    "scripts": {
+        "monaca:preview": "npm run dev",
+        "dev": "browser-sync start -s www/ --watch --port 8080 --ui-port 8081"
+    },
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-splashscreen": {},
+            "cordova-plugin-battery-status": {},
+            "cordova-plugin-dialogs": {},
+            "cordova-plugin-geolocation": {},
+            "phonegap-plugin-barcodescanner": {}
+        }
+    },
+    "devDependencies": {
+        "browser-sync": "~2.27.7",
+        "cordova": "^11.0.0"
+    }
+}
